@@ -1,0 +1,22 @@
+{
+  "byChat": {
+    "234123062948001@lid": {
+      "parsed": {
+        "isCalendarRequest": true,
+        "items": [
+          {
+            "title": "עבודה על מצגת",
+            "date": "2026-04-09",
+            "allDay": false,
+            "startTime": "09:00",
+            "durationMinutes": 60,
+            "originalTimeText": "מחר בבוקר"
+          }
+        ]
+      },
+      "sourceType": "text",
+      "originalText": "תפנה לי שעה מחר בבוקר לעבוד על מצגת",
+      "createdAt": "2026-04-08T13:27:41.139Z"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "mode": "רגיל",
+  "silentUntil": 0,
+  "directReplyCooldownMs": 4000,
+  "randomReplyCooldownMs": {
+    "רגיל": 45000,
+    "כאוס": 22000,
+    "רגוע": 90000
+  },
+  "randomReplyChance": {
+    "רגיל": 0.07,
+    "כאוס": 0.16,
+    "רגוע": 0.025
+  },
+  "contextWindowSize": 12,
+  "maxReplySentences": 2,
+  "allowJokesOnlyWhenAsked": true,
+  "familyBias": {
+    "preferOra": true,
+    "beWarmToNoa": true,
+    "beGentleWithKids": true,
+    "beGentleWithDogs": true
+  },
+  "styleRules": {
+    "noStandup": true,
+    "noForcedHumor": true,
+    "noOutOfContextReplies": true,
+    "soundLikeFamilyFriend": true,
+    "keepRepliesShort": true
+  }
+}
