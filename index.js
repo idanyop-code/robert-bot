@@ -28,7 +28,7 @@ const client = new Client({
   },
 });
 
-const OWNER_NUMBER = process.env.OWNER_NUMBER || '';
+const OWNER_NUMBER = process.env.OWNER_NUMBER || '';GIT
 const SCOPES = ['https://www.googleapis.com/auth/calendar'];
 
 const TOKEN_PATH = path.join(__dirname, 'token.json');
