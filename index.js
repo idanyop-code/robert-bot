@@ -173,16 +173,20 @@ function clearChatActive(chatId) {
   saveJson(CONVERSATION_STATE_PATH, conversationState);
 }
 
+let qrSaved = false;
+
 client.on('qr', async (qr) => {
+  if (qrSaved) return;
+
   try {
     const qrPath = path.join(__dirname, 'temp', 'whatsapp-qr.png');
     await qrImage.toFile(qrPath, qr);
-    console.log('QR נשמר בקובץ:', qrPath);
+    qrSaved = true;
+    console.log('QR נשמר פעם אחת בלבד:', qrPath);
   } catch (err) {
     console.log('שגיאה ביצירת קובץ QR:', err.message);
   }
-})
-
+});
 
 client.on('ready', () => {
   console.log('רוברט מחובר 😈');
