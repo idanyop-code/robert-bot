@@ -29,6 +29,7 @@ const client = new Client({
 });
 
 const OWNER_NUMBER = process.env.OWNER_NUMBER || '';
+const PAIR_PHONE_NUMBER = process.env.PAIR_PHONE_NUMBER || '';
 const SCOPES = ['https://www.googleapis.com/auth/calendar'];
 
 const TOKEN_PATH = path.join(__dirname, 'token.json');
@@ -171,10 +172,21 @@ function clearChatActive(chatId) {
   saveJson(CONVERSATION_STATE_PATH, conversationState);
 }
 
-client.on('qr', qr => {
-  console.log('סרוק QR');
-  qrcode.generate(qr, { small: true });
+
+client.on('qr', async () => {
+  console.log('נוצר QR, מבקש קוד קישור...');
+  try {
+    if (PAIR_PHONE_NUMBER) {
+      const code = await client.requestPairingCode(PAIR_PHONE_NUMBER);
+      console.log('קוד קישור לוואטסאפ:', code);
+    } else {
+      console.log('חסר PAIR_PHONE_NUMBER ב .env');
+    }
+  } catch (err) {
+    console.log('שגיאה ביצירת קוד קישור:', err.message);
+  }
 });
+
 
 client.on('ready', () => {
   console.log('רוברט מחובר 😈');
