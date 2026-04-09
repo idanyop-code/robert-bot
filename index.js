@@ -5,6 +5,7 @@ const qrImage = require('qrcode');
 const OpenAI = require('openai');
 const path = require('path');
 const fs = require('fs');
+const http = require( 'http')
 const { google } = require('googleapis');
 const { authenticate } = require('@google-cloud/local-auth');
 
@@ -1292,6 +1293,35 @@ client.on('message', async msg => {
   } catch (err) {
     console.log('שגיאה:', err.message);
   }
+});
+const PORT = process.env.PORT || 3000;
+
+http.createServer((req, res) => {
+  const qrPath = path.join(__dirname, 'temp', 'whatsapp-qr.png');
+
+  if (req.url === '/qr') {
+    if (!fs.existsSync(qrPath)) {
+      res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+      return res.end('QR עדיין לא נוצר');
+    }
+
+    res.writeHead(200, { 'Content-Type': 'image/png' });
+    fs.createReadStream(qrPath).pipe(res);
+    return;
+  }
+
+  res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+  res.end(`
+    <html dir="rtl">
+      <body style="font-family: Arial; text-align: center; margin-top: 40px;">
+        <h2>QR של רוברט</h2>
+        <p><a href="/qr" target="_blank">פתח את תמונת ה QR</a></p>
+        <img src="/qr" style="max-width: 90vw; border: 1px solid #ccc;" />
+      </body>
+    </html>
+  `);
+}).listen(PORT, () => {
+  console.log('שרת QR עלה על פורט', PORT);
 });
 
 client.initialize();
