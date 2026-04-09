@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const { Client, LocalAuth } = require('whatsapp-web.js');
-const qrcode = require('qrcode');
+const qrImage = require('qrcode');
 const OpenAI = require('openai');
 const path = require('path');
 const fs = require('fs');
@@ -29,7 +29,7 @@ const client = new Client({
 });
 
 const OWNER_NUMBER = process.env.OWNER_NUMBER || '';GIT
-const SCOPES = ['https://www.googleapis.com/auth/calendar'];
+const SCOPES = ['https://www.googleapis.com/auth/calendar'];git
 
 const TOKEN_PATH = path.join(__dirname, 'token.json');
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
