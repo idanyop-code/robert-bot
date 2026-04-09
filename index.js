@@ -171,13 +171,15 @@ function clearChatActive(chatId) {
   saveJson(CONVERSATION_STATE_PATH, conversationState);
 }
 
-const qrcode = require('qrcode-terminal');
-
-client.on('qr', (qr) => {
-    console.log('SCAN QR HERE');
-    qrcode.generate(qr, { small: true });
-});
-
+client.on('qr', async (qr) => {
+  try {
+    const qrPath = path.join(__dirname, 'temp', 'whatsapp-qr.png');
+    await qrImage.toFile(qrPath, qr);
+    console.log('QR נשמר בקובץ:', qrPath);
+  } catch (err) {
+    console.log('שגיאה ביצירת קובץ QR:', err.message);
+  }
+})
 
 
 client.on('ready', () => {
