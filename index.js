@@ -9,6 +9,7 @@ const http = require( 'http')
 const { google } = require('googleapis');
 const { authenticate } = require('@google-cloud/local-auth');
 
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
